@@ -1,0 +1,173 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --neon-green: #00ff66;
+    --neon-cyan: #00f3ff;
+    --neon-magenta: #ff0055;
+    --neon-yellow: #ffcc00;
+    --arcade-dark: #0a0a12;
+    --arcade-card: #121324;
+}
+
+body {
+    font-family: 'VT323', monospace;
+    background-color: var(--arcade-dark);
+    color: #ffffff;
+    user-select: none;
+    -webkit-user-select: none;
+    overflow-x: hidden;
+    letter-spacing: 1px;
+    height: 100vh;
+    height: 100dvh;
+}
+
+.font-pixel {
+    font-family: 'Press Start 2P', cursive;
+}
+
+/* 8-bit Pixel Borders */
+.pixel-box {
+    background-color: var(--arcade-card);
+    border: 4px solid #3b3f58;
+    box-shadow: 
+        -4px 0 0 0 #3b3f58,
+        4px 0 0 0 #3b3f58,
+        0 -4px 0 0 #3b3f58,
+        0 4px 0 0 #3b3f58,
+        inset -4px -4px 0 0 #1b1d31;
+    position: relative;
+}
+
+.pixel-box-neon {
+    border-color: var(--neon-cyan);
+    box-shadow: 
+        -4px 0 0 0 var(--neon-cyan),
+        4px 0 0 0 var(--neon-cyan),
+        0 -4px 0 0 var(--neon-cyan),
+        0 4px 0 0 var(--neon-cyan),
+        0 0 12px rgba(0, 243, 255, 0.4);
+}
+
+.pixel-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    background: #252846;
+    border: 3px solid #fff;
+    color: #fff;
+    text-transform: uppercase;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.1s ease;
+    box-shadow: 0 4px 0 #111224;
+    position: relative;
+}
+
+.pixel-btn:hover, .pixel-btn:focus {
+    background: var(--neon-cyan);
+    color: #000;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 #111224;
+}
+
+.pixel-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #111224;
+}
+
+.pixel-btn-magenta {
+    background: var(--neon-magenta);
+    border-color: #fff;
+}
+.pixel-btn-magenta:hover, .pixel-btn-magenta:focus {
+    background: #ff3377;
+    color: #fff;
+}
+
+/* CRT Overlay Effect */
+@media (prefers-reduced-motion: reduce) {
+  .animate-bounce, .animate-pulse, .animate-spin {
+    animation: none !important;
+  }
+}
+
+/* Touch optimization for buttons */
+.pixel-btn, .dpad-btn {
+  touch-action: manipulation;
+}
+
+.crt-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: linear-gradient(
+        rgba(18, 16, 16, 0) 50%, 
+        rgba(0, 0, 0, 0.25) 50%
+    ), linear-gradient(
+        90deg,
+        rgba(255, 0, 0, 0.03),
+        rgba(0, 255, 0, 0.01),
+        rgba(0, 0, 255, 0.03)
+    );
+    background-size: 100% 3px, 6px 100%;
+    pointer-events: none;
+    z-index: 999;
+}
+
+.glow-text {
+    text-shadow: 0 0 8px currentColor;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #0a0a12;
+}
+::-webkit-scrollbar-thumb {
+    background: var(--neon-cyan);
+    border-radius: 0px;
+}
+
+/* Arcade Cabinet Frame */
+.arcade-cabinet {
+    background: linear-gradient(180deg, #1f1b2c 0%, #0d0b18 100%);
+    border: 4px solid #ff0055;
+    box-shadow: 0 0 25px rgba(255, 0, 85, 0.3), inset 0 0 20px rgba(0,0,0,0.8);
+}
+
+/* Mobile D-Pad Buttons with Large Touch Hit-Zones */
+.dpad-touch-zone {
+    position: relative;
+    touch-action: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.dpad-btn {
+    background: #1e2038;
+    border: 3px solid #505580;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: none;
+    transition: background 0.05s ease, transform 0.05s ease, border-color 0.05s ease;
+    box-shadow: 0 4px 0 #0d0e1a;
+}
+
+.dpad-btn:active, .dpad-btn.active {
+    background: var(--neon-cyan);
+    color: black;
+    transform: translateY(2px);
+    border-color: #ffffff;
+    box-shadow: 0 2px 0 #0d0e1a;
+}
+
+.dpad-btn-left {
+    background: #232747;
+    border-color: var(--neon-cyan);
+}
