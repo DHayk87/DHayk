@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Hayk.EXE icon">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#0a0a12"/>
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="18" fill="url(#bg)"/>
+  <rect x="10" y="10" width="108" height="108" rx="12" fill="#121324" stroke="#00f3ff" stroke-width="4"/>
+  <path d="M35 87 L64 29 L93 87 Z" fill="#00f3ff" opacity="0.9"/>
+  <path d="M52 87 L64 64 L76 87 Z" fill="#ff0055"/>
+  <rect x="45" y="83" width="38" height="10" fill="#ffcc00"/>
+  <text x="64" y="49" text-anchor="middle" font-size="16" font-family="monospace" font-weight="700" fill="#ffffff">H</text>
+</svg>

@@ -12,7 +12,7 @@
 }
 
 body {
-    font-family: 'VT323', monospace;
+    font-family: "VT323", monospace;
     background-color: var(--arcade-dark);
     color: #ffffff;
     user-select: none;
@@ -23,15 +23,20 @@ body {
     height: 100dvh;
 }
 
+:focus-visible {
+    outline: 3px solid var(--neon-cyan);
+    outline-offset: 3px;
+}
+
 .font-pixel {
-    font-family: 'Press Start 2P', cursive;
+    font-family: "Press Start 2P", cursive;
 }
 
 /* 8-bit Pixel Borders */
 .pixel-box {
     background-color: var(--arcade-card);
     border: 4px solid #3b3f58;
-    box-shadow: 
+    box-shadow:
         -4px 0 0 0 #3b3f58,
         4px 0 0 0 #3b3f58,
         0 -4px 0 0 #3b3f58,
@@ -42,7 +47,7 @@ body {
 
 .pixel-box-neon {
     border-color: var(--neon-cyan);
-    box-shadow: 
+    box-shadow:
         -4px 0 0 0 var(--neon-cyan),
         4px 0 0 0 var(--neon-cyan),
         0 -4px 0 0 var(--neon-cyan),
@@ -57,7 +62,7 @@ body {
     border: 3px solid #fff;
     color: #fff;
     text-transform: uppercase;
-    font-family: 'Press Start 2P', cursive;
+    font-family: "Press Start 2P", cursive;
     font-size: 14px;
     cursor: pointer;
     transition: all 0.1s ease;
@@ -65,7 +70,8 @@ body {
     position: relative;
 }
 
-.pixel-btn:hover, .pixel-btn:focus {
+.pixel-btn:hover,
+.pixel-btn:focus-visible {
     background: var(--neon-cyan);
     color: #000;
     transform: translateY(-2px);
@@ -77,40 +83,63 @@ body {
     box-shadow: 0 2px 0 #111224;
 }
 
+.pixel-btn[aria-pressed="true"] {
+    box-shadow:
+        0 0 0 3px rgba(0, 243, 255, 0.45),
+        0 4px 0 #111224;
+}
+
 .pixel-btn-magenta {
     background: var(--neon-magenta);
     border-color: #fff;
 }
-.pixel-btn-magenta:hover, .pixel-btn-magenta:focus {
+.pixel-btn-magenta:hover,
+.pixel-btn-magenta:focus {
     background: #ff3377;
     color: #fff;
 }
 
 /* CRT Overlay Effect */
 @media (prefers-reduced-motion: reduce) {
-  .animate-bounce, .animate-pulse, .animate-spin {
-    animation: none !important;
-  }
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .animate-bounce,
+    .animate-pulse,
+    .animate-spin {
+        animation: none !important;
+    }
 }
 
 /* Touch optimization for buttons */
-.pixel-btn, .dpad-btn {
-  touch-action: manipulation;
+.pixel-btn,
+.dpad-btn {
+    touch-action: manipulation;
 }
 
 .crt-overlay {
     position: fixed;
-    top: 0; left: 0; width: 100vw; height: 100vh;
-    background: linear-gradient(
-        rgba(18, 16, 16, 0) 50%, 
-        rgba(0, 0, 0, 0.25) 50%
-    ), linear-gradient(
-        90deg,
-        rgba(255, 0, 0, 0.03),
-        rgba(0, 255, 0, 0.01),
-        rgba(0, 0, 255, 0.03)
-    );
-    background-size: 100% 3px, 6px 100%;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background:
+        linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+        linear-gradient(
+            90deg,
+            rgba(255, 0, 0, 0.03),
+            rgba(0, 255, 0, 0.01),
+            rgba(0, 0, 255, 0.03)
+        );
+    background-size:
+        100% 3px,
+        6px 100%;
     pointer-events: none;
     z-index: 999;
 }
@@ -135,7 +164,9 @@ body {
 .arcade-cabinet {
     background: linear-gradient(180deg, #1f1b2c 0%, #0d0b18 100%);
     border: 4px solid #ff0055;
-    box-shadow: 0 0 25px rgba(255, 0, 85, 0.3), inset 0 0 20px rgba(0,0,0,0.8);
+    box-shadow:
+        0 0 25px rgba(255, 0, 85, 0.3),
+        inset 0 0 20px rgba(0, 0, 0, 0.8);
 }
 
 /* Mobile D-Pad Buttons with Large Touch Hit-Zones */
@@ -155,11 +186,15 @@ body {
     user-select: none;
     -webkit-user-select: none;
     touch-action: none;
-    transition: background 0.05s ease, transform 0.05s ease, border-color 0.05s ease;
+    transition:
+        background 0.05s ease,
+        transform 0.05s ease,
+        border-color 0.05s ease;
     box-shadow: 0 4px 0 #0d0e1a;
 }
 
-.dpad-btn:active, .dpad-btn.active {
+.dpad-btn:active,
+.dpad-btn.active {
     background: var(--neon-cyan);
     color: black;
     transform: translateY(2px);
