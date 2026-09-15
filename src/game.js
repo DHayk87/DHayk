@@ -206,9 +206,9 @@ function shootBullet() {
 
 function spawnEnemy() {
     const type = enemyTypes[Math.floor(Math.random() * enemyTypes.length)];
-    ctx.font = '14px "VT323", monospace';
-    const textWidth = ctx.measureText(type.label).width;
-    const width = Math.max(76, textWidth + 16); // padding for text
+    // VT323 14px font is approximately 8px per character
+    const estimatedWidth = type.label.length * 8;
+    const width = Math.max(76, estimatedWidth + 24); // generous padding
     const x = Math.max(5, Math.min(canvas.width - width - 5, Math.random() * (canvas.width - width)));
     enemies.push(new Enemy(x, -30, width, type));
 }
@@ -217,9 +217,9 @@ function spawnPowerup(x, y) {
     const skill = skillDrops[Math.floor(Math.random() * skillDrops.length)];
     const p = new Powerup(x, y, skill);
     
-    ctx.font = '13px "Press Start 2P", cursive';
-    const textWidth = ctx.measureText(skill.label).width;
-    p.width = Math.max(66, textWidth + 16);
+    // "Press Start 2P" 13px font is exactly 13px per character
+    const estimatedWidth = skill.label.length * 13;
+    p.width = Math.max(66, estimatedWidth + 20); // generous padding
     
     // adjust x if powerup spawns out of bounds due to new width
     if (p.x + p.width > canvas.width) {
