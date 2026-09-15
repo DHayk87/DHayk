@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <meta
             name="viewport"
-            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+            content="width=device-width, initial-scale=1.0"
         />
         <meta
             name="description"
@@ -34,21 +34,7 @@
             }
         </script>
 
-        <!-- Retro Pixel Fonts -->
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap"
-            rel="stylesheet"
-        />
-
-        <!-- FontAwesome for Icons -->
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-        />
-        <link rel="preload" as="script" href="/src/main.js" />
-        <link rel="prefetch" as="script" href="/src/game.js" />
+        <!-- Local font assets -->
     </head>
     <body
         class="h-screen w-screen overflow-hidden relative flex flex-col justify-between select-none"
@@ -68,7 +54,7 @@
                     >
                     <div>
                         <h1
-                            class="text-[18px] sm:text-[22px] md:text-[28px] font-pixel text-cyan-400 glow-text tracking-wider"
+                            class="text-[14px] sm:text-[22px] md:text-[28px] font-pixel text-cyan-400 glow-text tracking-wider"
                         >
                             HAYK.EXE
                         </h1>
@@ -88,17 +74,16 @@
                     >
                         <button
                             id="btn-mode-game"
-                            aria-label="Game Mode"
-                            class="pixel-btn text-[13px] md:text-[16px] !py-1 !px-2 bg-cyan-500 !text-black"
+                            class="pixel-btn text-[13px] md:text-[16px] !py-1 !px-2"
+                            aria-pressed="true"
                         >
-                            <i class="fa-solid fa-gamepad mr-1"></i> GAME
+                            🎮 GAME
                         </button>
                         <button
                             id="btn-mode-read"
-                            aria-label="Read CV Mode"
-                            class="pixel-btn text-[13px] md:text-[16px] !py-1 !px-2 bg-slate-800"
+                            class="pixel-btn text-[13px] md:text-[16px] !py-1 !px-2"
                         >
-                            <i class="fa-solid fa-file-code mr-1"></i> CV READ
+                            🧠 CV READ
                         </button>
                     </div>
 
@@ -109,7 +94,7 @@
                         class="p-1.5 md:p-2 bg-slate-800 border border-slate-600 rounded text-[16px] text-yellow-400 hover:bg-slate-700"
                         title="Toggle CRT FX"
                     >
-                        <i class="fa-solid fa-tv"></i>
+                        📺
                     </button>
 
                     <!-- Audio Toggle -->
@@ -119,7 +104,7 @@
                         class="p-1.5 md:p-2 bg-slate-800 border border-slate-600 rounded text-[16px] text-emerald-400 hover:bg-slate-700"
                         title="Toggle Sound"
                     >
-                        <i id="audio-icon" class="fa-solid fa-volume-high"></i>
+                        <span id="audio-icon" class="text-emerald-400">🔊</span>
                     </button>
                 </div>
             </div>
@@ -144,7 +129,10 @@
                         ></span>
                         <span class="text-pink-500">STAGE 1: DEV INVADERS</span>
                     </div>
-                    <div class="text-right flex space-x-3">
+                    <div class="text-right flex space-x-2 sm:space-x-4">
+                        <span class="text-cyan-400"
+                            >SKILLS: <span id="game-unlocked-count">0/6</span></span
+                        >
                         <span class="text-yellow-400"
                             >SCORE: <span id="game-score">00000</span></span
                         >
@@ -156,7 +144,7 @@
 
                 <!-- Canvas Container Wrapper -->
                 <div
-                    class="relative w-full max-w-4xl flex-grow min-h-0 bg-black border-x-4 border-b-4 border-cyan-500 shadow-2xl rounded-b-md overflow-hidden flex items-center justify-center"
+                    class="relative w-full max-w-4xl flex-grow min-h-[350px] sm:min-h-[450px] bg-black border-x-4 border-b-4 border-cyan-500 shadow-2xl rounded-b-md overflow-hidden flex items-center justify-center"
                 >
                     <canvas
                         id="gameCanvas"
@@ -185,18 +173,15 @@
                         <div class="flex flex-col sm:flex-row gap-3">
                             <button
                                 id="btn-start-game"
-                                aria-label="Start Game"
                                 class="pixel-btn pixel-btn-magenta !text-[16px] sm:!text-[18px] md:!text-[20px] !py-2.5 !px-5 animate-bounce"
                             >
-                                <i class="fa-solid fa-play mr-2"></i> INSERT COIN / START
+                                ▶ INSERT COIN / START
                             </button>
                             <button
                                 id="btn-skip-read"
-                                aria-label="Skip to CV"
                                 class="pixel-btn !text-[16px] !py-2.5 !px-4"
                             >
-                                SKIP TO CV READ MODE
-                                <i class="fa-solid fa-forward ml-1"></i>
+                                SKIP TO CV READ MODE →
                             </button>
                         </div>
 
@@ -232,10 +217,9 @@
                         <div id="touch-zone-left" class="dpad-touch-zone p-2 -m-2">
                             <button
                                 id="btn-left"
-                                aria-label="Move Left"
                                 class="dpad-btn dpad-btn-left w-20 h-14 sm:w-24 sm:h-16 rounded-lg font-pixel text-[24px] sm:text-[28px] text-cyan-300"
                             >
-                                <i class="fa-solid fa-caret-left mr-1"></i> ◀
+                                ◀
                             </button>
                         </div>
 
@@ -243,24 +227,10 @@
                         <div id="touch-zone-right" class="dpad-touch-zone p-2 -m-2">
                             <button
                                 id="btn-right"
-                                aria-label="Move Right"
                                 class="dpad-btn w-16 h-14 sm:w-20 sm:h-16 rounded-lg font-pixel text-[24px] sm:text-[28px] text-slate-200"
                             >
-                                ▶ <i class="fa-solid fa-caret-right ml-1"></i>
+                                ▶
                             </button>
-                        </div>
-                    </div>
-
-                    <!-- Unlocked Stats Preview in Game -->
-                    <div class="text-center px-1">
-                        <div class="text-cyan-400 font-pixel text-[12px] sm:text-[14px]">
-                            SKILLS
-                        </div>
-                        <div
-                            id="game-unlocked-count"
-                            class="text-yellow-400 font-pixel text-[16px] sm:text-[18px]"
-                        >
-                            0 / 6
                         </div>
                     </div>
 
@@ -268,7 +238,6 @@
                     <div id="touch-zone-fire" class="dpad-touch-zone p-1 -m-1">
                         <button
                             id="btn-fire"
-                            aria-label="Fire"
                             class="pixel-btn pixel-btn-magenta h-14 sm:h-16 px-4 sm:px-6 flex items-center justify-center font-pixel text-[16px] sm:text-[18px] rounded-lg active:bg-pink-600"
                         >
                             FIRE 🔥
@@ -278,7 +247,7 @@
             </section>
 
             <!-- ================= READ MODE / CV DETAILS (Scrollable within container) ================= -->
-            <section
+            <article
                 id="section-cv"
                 class="w-full h-full hidden overflow-y-auto space-y-4 pr-1"
             >
@@ -327,13 +296,13 @@
                             href="mailto:dhayk87@gmail.com"
                             class="pixel-btn pixel-btn-magenta flex-1 md:flex-none text-center text-[16px]"
                         >
-                            <i class="fa-solid fa-envelope mr-1"></i> EMAIL ME
+                            ✉️ EMAIL ME
                         </a>
                         <a
                             href="#contact-section"
                             class="pixel-btn flex-1 md:flex-none text-center text-[16px]"
                         >
-                            <i class="fa-solid fa-terminal mr-1"></i> QUEST LOG
+                            ⌨️ QUEST LOG
                         </a>
                     </div>
                 </div>
@@ -342,7 +311,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
                     <!-- Stat Card 1 -->
                     <div class="pixel-box p-3 border-l-4 border-emerald-400">
-                        <div class="text-[14px] text-slate-400 font-pixel mb-0.5">
+                        <div class="text-[14px] text-slate-300 font-pixel mb-0.5">
                             MAIN CLASS
                         </div>
                         <div class="text-[22px] text-emerald-400 font-bold">
@@ -355,7 +324,7 @@
                     </div>
                     <!-- Stat Card 2 -->
                     <div class="pixel-box p-3 border-l-4 border-cyan-400">
-                        <div class="text-[14px] text-slate-400 font-pixel mb-0.5">
+                        <div class="text-[14px] text-slate-300 font-pixel mb-0.5">
                             SUB CLASS
                         </div>
                         <div class="text-[22px] text-cyan-400 font-bold">
@@ -368,7 +337,7 @@
                     </div>
                     <!-- Stat Card 3 -->
                     <div class="pixel-box p-3 border-l-4 border-yellow-400">
-                        <div class="text-[14px] text-slate-400 font-pixel mb-0.5">
+                        <div class="text-[14px] text-slate-300 font-pixel mb-0.5">
                             SPECIAL ABILITY
                         </div>
                         <div class="text-[22px] text-yellow-400 font-bold">
@@ -382,11 +351,10 @@
                 </div>
 
                 <!-- SKILL TREES / INVENTORY -->
-                <div class="pixel-box p-4 space-y-3">
-                    <h3 class="font-pixel text-[20px] text-yellow-400 flex items-center">
-                        <i class="fa-solid fa-shield-halved mr-2 text-cyan-400"></i> SKILL
-                        INVENTORY & EXP LEVEL
-                    </h3>
+                <section class="pixel-box p-4 space-y-3">
+                    <h2 class="font-pixel text-[20px] text-yellow-400 flex items-center">
+                        🛡️ SKILL INVENTORY & EXP LEVEL
+                    </h2>
 
                     <!-- Senior Tier -->
                     <div class="space-y-1.5">
@@ -396,48 +364,38 @@
                             <span class="text-emerald-400">SENIOR TIER (MASTER)</span>
                             <span class="text-slate-400">XP 95%</span>
                         </div>
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-[16px]">
-                            <div
-                                class="bg-slate-900 border border-emerald-500/50 p-2 rounded flex justify-between items-center"
+                        <ul class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-[16px]">
+                            <li
+                                class="bg-slate-900 border border-emerald-500/50 p-2 rounded flex justify-between items-center skill-item locked"
+                                data-skill="HTML/CSS"
                             >
-                                <span class="text-white font-bold"
-                                    ><i
-                                        class="fa-brands fa-html5 text-orange-500 mr-2"
-                                    ></i
-                                    >HTML5 / Semantic</span
-                                >
+                                <span class="text-white font-bold">HTML5 / Semantic</span>
                                 <span
                                     class="text-[14px] bg-emerald-900 text-emerald-300 px-1 rounded"
                                     >Senior</span
                                 >
-                            </div>
-                            <div
-                                class="bg-slate-900 border border-emerald-500/50 p-2 rounded flex justify-between items-center"
+                            </li>
+                            <li
+                                class="bg-slate-900 border border-emerald-500/50 p-2 rounded flex justify-between items-center skill-item locked"
+                                data-skill="CSS3/Tailwind"
                             >
-                                <span class="text-white font-bold"
-                                    ><i
-                                        class="fa-brands fa-css3-alt text-blue-500 mr-2"
-                                    ></i
-                                    >CSS3 / Tailwind</span
-                                >
+                                <span class="text-white font-bold">CSS3 / Tailwind</span>
                                 <span
                                     class="text-[14px] bg-emerald-900 text-emerald-300 px-1 rounded"
                                     >Senior</span
                                 >
-                            </div>
-                            <div
-                                class="bg-slate-900 border border-emerald-500/50 p-2 rounded flex justify-between items-center"
+                            </li>
+                            <li
+                                class="bg-slate-900 border border-emerald-500/50 p-2 rounded flex justify-between items-center skill-item locked"
+                                data-skill="JS ES6+"
                             >
-                                <span class="text-white font-bold"
-                                    ><i class="fa-brands fa-js text-yellow-400 mr-2"></i
-                                    >JavaScript ES6+</span
-                                >
+                                <span class="text-white font-bold">JavaScript ES6+</span>
                                 <span
                                     class="text-[14px] bg-emerald-900 text-emerald-300 px-1 rounded"
                                     >Senior</span
                                 >
-                            </div>
-                        </div>
+                            </li>
+                        </ul>
                     </div>
 
                     <!-- Middle Tier -->
@@ -448,48 +406,42 @@
                             <span class="text-cyan-400">MIDDLE TIER (ADVANCED)</span>
                             <span class="text-slate-400">XP 75%</span>
                         </div>
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-[16px]">
-                            <div
-                                class="bg-slate-900 border border-cyan-500/50 p-2 rounded flex justify-between items-center"
+                        <ul class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-[16px]">
+                            <li
+                                class="bg-slate-900 border border-cyan-500/50 p-2 rounded flex justify-between items-center skill-item locked"
+                                data-skill="React.js"
                             >
                                 <span class="text-white font-bold"
-                                    ><i class="fa-brands fa-react text-cyan-400 mr-2"></i
                                     >React.js / Next.js</span
                                 >
                                 <span
                                     class="text-[14px] bg-cyan-900 text-cyan-300 px-1 rounded"
                                     >Middle</span
                                 >
-                            </div>
-                            <div
-                                class="bg-slate-900 border border-cyan-500/50 p-2 rounded flex justify-between items-center"
+                            </li>
+                            <li
+                                class="bg-slate-900 border border-cyan-500/50 p-2 rounded flex justify-between items-center skill-item locked"
+                                data-skill="Node.js"
                             >
                                 <span class="text-white font-bold"
-                                    ><i
-                                        class="fa-brands fa-node-js text-green-500 mr-2"
-                                    ></i
                                     >Node.js / Express</span
                                 >
                                 <span
                                     class="text-[14px] bg-cyan-900 text-cyan-300 px-1 rounded"
                                     >Middle</span
                                 >
-                            </div>
-                            <div
-                                class="bg-slate-900 border border-cyan-500/50 p-2 rounded flex justify-between items-center"
+                            </li>
+                            <li
+                                class="bg-slate-900 border border-cyan-500/50 p-2 rounded flex justify-between items-center skill-item locked"
+                                data-skill="n8n"
                             >
-                                <span class="text-white font-bold"
-                                    ><i
-                                        class="fa-solid fa-diagram-project text-pink-400 mr-2"
-                                    ></i
-                                    >n8n Workflows</span
-                                >
+                                <span class="text-white font-bold">n8n Workflows</span>
                                 <span
                                     class="text-[14px] bg-cyan-900 text-cyan-300 px-1 rounded"
                                     >Middle</span
                                 >
-                            </div>
-                        </div>
+                            </li>
+                        </ul>
                     </div>
 
                     <!-- Junior Tier -->
@@ -500,52 +452,46 @@
                             <span class="text-yellow-400">JUNIOR TIER (EXPLORING)</span>
                             <span class="text-slate-400">XP 40%</span>
                         </div>
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-[16px]">
-                            <div
-                                class="bg-slate-900 border border-yellow-500/50 p-2 rounded flex justify-between items-center"
+                        <ul class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-[16px]">
+                            <li
+                                class="bg-slate-900 border border-yellow-500/50 p-2 rounded flex justify-between items-center skill-item locked"
+                                data-skill="Golang"
                             >
-                                <span class="text-white font-bold"
-                                    ><i class="fa-solid fa-code text-cyan-300 mr-2"></i>Go
-                                    (Golang)</span
-                                >
+                                <span class="text-white font-bold">Go (Golang)</span>
                                 <span
                                     class="text-[14px] bg-yellow-900 text-yellow-300 px-1 rounded"
                                     >Junior</span
                                 >
-                            </div>
-                        </div>
+                            </li>
+                        </ul>
                     </div>
 
                     <!-- Languages & Attributes -->
                     <div class="pt-2 border-t border-slate-800 space-y-1.5">
-                        <div class="text-[14px] text-slate-400 font-pixel">
+                        <div class="text-[14px] text-slate-300 font-pixel">
                             LANGUAGES SPOKEN
                         </div>
-                        <div class="flex flex-wrap gap-2 text-[16px]">
-                            <span
+                        <ul class="flex flex-wrap gap-2 text-[16px]">
+                            <li
                                 class="bg-slate-800 text-cyan-300 px-2 py-1 rounded border border-slate-700"
-                                ><i class="fa-solid fa-language mr-1"></i> Armenian
-                                (Native)</span
+                                >🌐 Armenian (Native)</li
                             >
-                            <span
+                            <li
                                 class="bg-slate-800 text-cyan-300 px-2 py-1 rounded border border-slate-700"
-                                ><i class="fa-solid fa-language mr-1"></i> Russian
-                                (Fluent)</span
+                                >🌐 Russian (Fluent)</li
                             >
-                            <span
+                            <li
                                 class="bg-slate-800 text-cyan-300 px-2 py-1 rounded border border-slate-700"
-                                ><i class="fa-solid fa-language mr-1"></i> English
-                                (Fluent)</span
+                                >🌐 English (Fluent)</li
                             >
-                        </div>
+                        </ul>
                     </div>
-                </div>
+                </section>
 
                 <!-- QUEST LOG / EXPERIENCE & PROJECTS -->
                 <div id="contact-section" class="pixel-box p-4 space-y-3">
                     <h3 class="font-pixel text-[20px] text-emerald-400 flex items-center">
-                        <i class="fa-solid fa-scroll mr-2 text-yellow-400"></i> CAREER
-                        QUEST LOG & COMPLETED MISSIONS
+                        📜 CAREER QUEST LOG & COMPLETED MISSIONS
                     </h3>
 
                     <div class="space-y-3 text-[16px] sm:text-[18px]">
@@ -673,7 +619,7 @@
                             href="mailto:dhayk87@gmail.com"
                             class="pixel-btn pixel-btn-magenta !text-[16px]"
                         >
-                            <i class="fa-solid fa-envelope mr-1.5"></i> dhayk87@gmail.com
+                            ✉️ dhayk87@gmail.com
                         </a>
                         <a
                             href="https://github.com"
@@ -681,7 +627,7 @@
                             rel="noopener noreferrer"
                             class="pixel-btn !text-[16px]"
                         >
-                            <i class="fa-brands fa-github mr-1.5"></i> GITHUB
+                            GH GITHUB
                         </a>
                         <a
                             href="https://linkedin.com"
@@ -689,16 +635,16 @@
                             rel="noopener noreferrer"
                             class="pixel-btn !text-[16px]"
                         >
-                            <i class="fa-brands fa-linkedin mr-1.5"></i> LINKEDIN
+                            IN LINKEDIN
                         </a>
                     </div>
-                </div>
-            </section>
+                </section>
+            </article>
         </main>
 
         <!-- Footer -->
         <footer
-            class="w-full text-center p-1.5 text-[13px] text-slate-500 font-pixel border-t border-slate-800 shrink-0"
+            class="w-full text-center p-1.5 text-[13px] text-slate-400 font-pixel border-t border-slate-800 shrink-0"
         >
             <p>© 2026 HAYK // BUILT WITH HTML5 CANVAS, TAILWIND & WEB AUDIO API</p>
         </footer>

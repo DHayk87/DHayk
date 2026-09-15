@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://hayk.dev/sitemap.xml

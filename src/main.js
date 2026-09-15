@@ -1,6 +1,29 @@
 import "./style.css";
 import { toggleAudioState, playSound } from "./audio.js";
-import { initGame, startGame, resizeCanvas, setGamePaused } from "./game.js";
+
+let gameModule = null;
+let gameReady = false;
+
+async function ensureGameLoaded() {
+    if (!gameModule) {
+        gameModule = await import("./game.js");
+    }
+
+    if (!gameReady) {
+        const canvas = document.getElementById("gameCanvas");
+        if (canvas) {
+            gameModule.initGame(canvas);
+            gameReady = true;
+            
+            // If the game section is visible, resume engine immediately
+            if (!document.getElementById("section-game").classList.contains("hidden")) {
+                gameModule.resumeEngine();
+            }
+        }
+    }
+
+    return gameModule;
+}
 
 // Setup Event Listeners
 document.addEventListener("DOMContentLoaded", () => {
@@ -25,12 +48,16 @@ document.addEventListener("DOMContentLoaded", () => {
     switchMode("game");
 
     // Start Game Button
-    document.getElementById("btn-start-game").addEventListener("click", startGame);
+    document.getElementById("btn-start-game").addEventListener("click", async () => {
+        const module = await ensureGameLoaded();
+        module.startGame();
+    });
 
-    // Initialize Game Canvas
-    const canvas = document.getElementById("gameCanvas");
-    if (canvas) {
-        initGame(canvas);
+    // Initialize Game Canvas only when the user actually enters game mode
+    if (window.matchMedia("(min-width: 769px)").matches) {
+        ensureGameLoaded().catch(() => {
+            console.warn("Game module failed to load");
+        });
     }
 });
 
@@ -42,9 +69,7 @@ function switchMode(mode) {
 
     const setButtonState = (button, active) => {
         button.setAttribute("aria-pressed", String(active));
-        button.className = active
-            ? "pixel-btn text-[13px] md:text-[16px] !py-1 !px-2 bg-cyan-500 !text-black"
-            : "pixel-btn text-[13px] md:text-[16px] !py-1 !px-2 bg-slate-800";
+        button.className = "pixel-btn text-[13px] md:text-[16px] !py-1 !px-2";
     };
 
     if (mode === "game") {
@@ -52,14 +77,20 @@ function switchMode(mode) {
         setButtonState(readBtn, false);
         gameSec.classList.remove("hidden");
         readSec.classList.add("hidden");
-        setGamePaused(false);
-        resizeCanvas();
+
+        if (gameModule) {
+            gameModule.resizeCanvas();
+            gameModule.resumeEngine();
+        }
     } else {
         setButtonState(readBtn, true);
         setButtonState(gameBtn, false);
         readSec.classList.remove("hidden");
         gameSec.classList.add("hidden");
-        setGamePaused(true);
+        
+        if (gameModule) {
+            gameModule.pauseEngine();
+        }
     }
 }
 
@@ -72,9 +103,11 @@ function toggleAudio() {
     button.setAttribute("aria-label", isMuted ? "Enable audio" : "Mute audio");
 
     if (isMuted) {
-        icon.className = "fa-solid fa-volume-xmark text-red-400";
+        icon.textContent = "🔇";
+        icon.className = "text-red-400";
     } else {
-        icon.className = "fa-solid fa-volume-high text-emerald-400";
+        icon.textContent = "🔊";
+        icon.className = "text-emerald-400";
         playSound("powerup");
     }
 }

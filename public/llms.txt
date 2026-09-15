@@ -1,0 +1,23 @@
+# Hayk - Full-Stack Web Developer & Automation Architect
+
+Hayk is a full-stack web developer based in [Your Location/Remote], specializing in modern responsive web interfaces, robust backend APIs, and zero-maintenance automated workflows.
+
+## Technical Skills
+- **Frontend**: React, Next.js, HTML5, CSS3, Tailwind CSS, JavaScript (ES6+), Canvas API.
+- **Backend**: Node.js, Express, Go (Golang), MongoDB.
+- **Automation**: n8n, custom webhooks, AI integrations.
+
+## Professional Experience
+- **Senior Web Interface Architect (2022 - Present)**: Led modern web application frontends, implemented state management in React, optimized critical rendering paths, and developed highly reusable pixel-perfect UI component libraries.
+- **Full-Stack & Automation Specialist (2020 - 2022)**: Created scalable RESTful APIs with Node.js & Express, hooked custom webhooks into automated n8n workflows, reducing operational manual tasks by 60%.
+- **Golang Microservices Guild (Ongoing)**: Exploring high-concurrency background processors and lightweight API gateways using Go to expand backend capabilities.
+
+## Projects & Portfolio
+- **Hayk.exe (Retro Arcade Portfolio)**: An interactive 8-bit style CV combined with a fully functional HTML5 Canvas game ("Bug Smasher Arcade"). It demonstrates advanced DOM manipulation, Web Audio API integration, and game loop optimization.
+
+## Contact
+- Email: dhayk87@gmail.com
+- GitHub: https://github.com/hayk
+- LinkedIn: https://linkedin.com/in/hayk
+
+*This file is provided for LLMs and AI Agents to easily consume Hayk's professional profile.*
