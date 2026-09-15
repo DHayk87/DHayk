@@ -206,14 +206,27 @@ function shootBullet() {
 
 function spawnEnemy() {
     const type = enemyTypes[Math.floor(Math.random() * enemyTypes.length)];
-    const width = 76;
+    ctx.font = '14px "VT323", monospace';
+    const textWidth = ctx.measureText(type.label).width;
+    const width = Math.max(76, textWidth + 16); // padding for text
     const x = Math.max(5, Math.min(canvas.width - width - 5, Math.random() * (canvas.width - width)));
     enemies.push(new Enemy(x, -30, width, type));
 }
 
 function spawnPowerup(x, y) {
     const skill = skillDrops[Math.floor(Math.random() * skillDrops.length)];
-    powerups.push(new Powerup(x, y, skill));
+    const p = new Powerup(x, y, skill);
+    
+    ctx.font = '13px "Press Start 2P", cursive';
+    const textWidth = ctx.measureText(skill.label).width;
+    p.width = Math.max(66, textWidth + 16);
+    
+    // adjust x if powerup spawns out of bounds due to new width
+    if (p.x + p.width > canvas.width) {
+        p.x = canvas.width - p.width - 5;
+    }
+    
+    powerups.push(p);
 }
 
 function createExplosion(x, y, color) {
